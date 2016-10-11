@@ -4,26 +4,54 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.FileReader;
+import java.util.List;
+import java.io.BufferedWriter;
+
+
 /**
  * Created by jacobwilliams on 10/10/16.
  */
 public class ToDoList {
+
     static ArrayList <String> grocery = new ArrayList<>();
    static ArrayList <String> toDo = new ArrayList<>();
     static ArrayList <String> personal = new ArrayList<>();
     static Scanner pickMenu = new Scanner(System.in);
    static String Choices;
-    public static void toDoList()throws IOException {
-        String fileName = "to-do.txt";
-        PrintWriter outFile = new PrintWriter(new FileWriter(fileName)); //won't work if you don't catch for IO exception.
 
+    public static void toDoList()throws IOException {
+
+//        String fileName = "to-do.txt";
+        String grocier;
+        String todo;
+        String per;
+        PrintWriter grocFile = new PrintWriter(new FileWriter("groc.txt", true)); //won't work if you don't catch for IO exception.
+        PrintWriter toDoFile = new PrintWriter(new FileWriter("toDo.txt", true));
+        PrintWriter persFile = new PrintWriter(new FileWriter("pers.txt", true));
+
+        Scanner grocierFile = new Scanner(new FileReader("groc.txt"));
+        while(grocierFile.hasNextLine()){
+            grocier = (grocierFile.nextLine());
+            grocery.add(grocier);
+        }
+        Scanner todoFile = new Scanner(new FileReader("toDo.txt"));
+        while(todoFile.hasNextLine()){
+            todo = (todoFile.nextLine());
+            toDo.add(todo);
+        }
+        Scanner personalFile = new Scanner(new FileReader("pers.txt"));
+        while(personalFile.hasNextLine()){
+            per = (personalFile.nextLine());
+            personal.add(per);
+        }
         while (true) {
             System.out.println("Menu:" + "\n"
                     + "[1]Add Items to he list" + "\n"
                     + "[2]Remove items from the list" + "\n"
                     + "[3]List Items from your to-do lists" + "\n"
                     + "[4]Display help menu" + "\n"
-                    + "[5]Quit");
+                    + "[5]Save & Quit");
             Choices = pickMenu.nextLine();
             int listChoice;
             Scanner toDolists = new Scanner(System.in);
@@ -202,10 +230,22 @@ public class ToDoList {
                 System.out.println("You can add and remove any of the items to all your lists using the main menu. Thank you for using our list helper");
             }
             if (Choices.equals("5")) {
-                outFile.println(toDo);
-                outFile.println(grocery);
-                outFile.println(personal);
-                outFile.close();
+                toDoFile = new PrintWriter(new FileWriter("toDo.txt"));
+                for (int i = 0; i < toDo.size(); i++){
+                    toDoFile.println(toDo.get(i));
+
+                }
+                grocFile = new PrintWriter(new FileWriter("groc.txt"));
+                for (int i = 0; i < grocery.size(); i++){
+                    grocFile.println(grocery.get(i));
+                }
+                persFile = new PrintWriter(new FileWriter("pers.txt"));
+                for (int i = 0; i <personal.size(); i++){
+                    persFile.println(personal.get(i));
+                }
+                toDoFile.close();
+                grocFile.close();
+                persFile.close();
                 break;
             }
              else

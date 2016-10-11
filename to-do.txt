@@ -1,3 +1,7 @@
-[]
-[]
-[]
+
+To Do List: [run]
+Grocery List: []
+ Personal List: [go shopping, run, to]
+To Do List: []
+Grocery List: [bread]
+ Personal List: []
