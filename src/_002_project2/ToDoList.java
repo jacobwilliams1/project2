@@ -233,7 +233,6 @@ public class ToDoList {
                 toDoFile = new PrintWriter(new FileWriter("toDo.txt"));
                 for (int i = 0; i < toDo.size(); i++){
                     toDoFile.println(toDo.get(i));
-
                 }
                 grocFile = new PrintWriter(new FileWriter("groc.txt"));
                 for (int i = 0; i < grocery.size(); i++){
